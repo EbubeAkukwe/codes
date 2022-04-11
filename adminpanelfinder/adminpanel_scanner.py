@@ -1,5 +1,6 @@
 import urllib.request
 url_ = input("Enter website to scan:")
+headers = {"Content-type": "application/x-www-form-urlencoded","Accept": "text/plain"}
 v = open("link.txt" , "r" )
 while True:
     panel = v.readline()      
@@ -8,12 +9,13 @@ while True:
     url = "https://"+url_+"/"+panel
     try :
         f = urllib.request.urlopen(url)
-        f.addheaders (["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36"])
+        #f.addheaders(headers)
 
-    except urllib.error.URLError as e :
+    except urllib.error.URLError as a :
         print("An error occured \n Status :"+str(e.status)+":"+e.msg +"\n Try the following : \n 1. Input a valid web address in a valid format e.g me.com \n 2. Make sure you have an internet connection.")
-    except urllib.error.HTTPError as e:
+    except urllib.error.HTTPError as b:
         print("An error occured \n Status :"+str(e.status)+":"+e.status_code +"\n Try the following : \n 1. Input a valid web address in a valid format e.g me.com \n 2. Make sure you have an internet connection.")
     else:
-        print("Status : " + str(e.status) +":"+ e.status_code) 
+        print("Status : " + str(f.msg) +":"+ str(f.code)) 
         print ("Admin panel found: => ",url)
+        break
